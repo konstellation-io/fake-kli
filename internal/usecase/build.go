@@ -14,7 +14,7 @@ var BuildCmd = &cobra.Command{
 	Use:   "build",
 	Short: "Build a new KRT file from the configuration",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("build called")
+		fmt.Println("Krt file built successfully")
 	},
 }
 

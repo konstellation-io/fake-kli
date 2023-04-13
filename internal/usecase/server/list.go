@@ -5,22 +5,17 @@ package server
 
 import (
 	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
 // serverListCmd represents the serverList command
 var serverListCmd = &cobra.Command{
 	Use:   "ls",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "List all servers",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("serverList called")
+		// list a list of fake servers with their names and urls
+		fmt.Printf("Server %q: %q\n", "server1", "https://server1.com")
+		fmt.Printf("Server %q: %q\n", "server2", "https://server2.com")
 	},
 }
 

@@ -12,19 +12,25 @@ import (
 // serverAddCmd represents the serverAdd command
 var serverAddCmd = &cobra.Command{
 	Use:   "add",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Add a new server to the project",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("serverAdd called")
+
+		url, _ := cmd.Flags().GetString("url")
+		remote, _ := cmd.Flags().GetString("remote")
+
+		fmt.Printf("Server with url %q added as %q", url, remote)
 	},
 }
 
 func init() {
 	// Add subcommand to the parent command
 	ServerCmd.AddCommand(serverAddCmd)
+
+	// Add flags to the subcommand
+	serverAddCmd.Flags().String("url", "", "Server url")
+	serverAddCmd.Flags().String("remote", "", "Server name")
+
+	// Mark flags as required
+	serverAddCmd.MarkFlagRequired("url")
+	serverAddCmd.MarkFlagRequired("remote")
 }

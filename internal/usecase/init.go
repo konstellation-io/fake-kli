@@ -34,7 +34,7 @@ func exec(cmd *cobra.Command, args []string) {
 	}
 
 	// Create a properties file
-	viper.Set("kr_version", 2)
+	viper.Set("krt_version", 2)
 	viper.Set("name", name)
 	viper.Set("version", version)
 

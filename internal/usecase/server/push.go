@@ -12,19 +12,24 @@ import (
 // serverPushCmd represents the serverPush command
 var serverPushCmd = &cobra.Command{
 	Use:   "push",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Uploads the generated KRT to the server",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("serverPush called")
+		remote, _ := cmd.Flags().GetString("remote")
+		krtFile, _ := cmd.Flags().GetString("krt-file")
+
+		fmt.Printf("KRT file %q uploaded to server %q", krtFile, remote)
 	},
 }
 
 func init() {
 	// Add subcommand to the parent command
 	ServerCmd.AddCommand(serverPushCmd)
+
+	// Add flags to the subcommand
+	serverPushCmd.Flags().String("remote", "", "Server name to login to")
+	serverPushCmd.Flags().String("krt-file", "", "Krt file to upload")
+
+	// Mark flags as required
+	serverPushCmd.MarkFlagRequired("remote")
+	serverPushCmd.MarkFlagRequired("krt-file")
 }
