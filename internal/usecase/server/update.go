@@ -12,19 +12,24 @@ import (
 // serverUpdateCmd represents the serverUpdate command
 var serverUpdateCmd = &cobra.Command{
 	Use:   "update",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Update a server",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("serverUpdate called")
+		remote := cmd.Flags().String("remote", "", "Server name to update")
+		url := cmd.Flags().String("url", "", "Server url")
+
+		fmt.Printf("Server %q updated with url %q", remote, url)
 	},
 }
 
 func init() {
 	// Add subcommand to the parent command
 	ServerCmd.AddCommand(serverUpdateCmd)
+
+	// Add flags to the subcommand
+	serverUpdateCmd.Flags().String("remote", "", "Server name to update")
+	serverUpdateCmd.Flags().String("url", "", "Server url")
+
+	// Mark flags as required
+	serverUpdateCmd.MarkFlagRequired("remote")
+	serverUpdateCmd.MarkFlagRequired("url")
 }

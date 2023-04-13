@@ -4,7 +4,10 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package workflow
 
 import (
+	"encoding/json"
 	"fmt"
+	"github.com/konstellation-io/fake-kli/internal/domain"
+	"github.com/spf13/viper"
 
 	"github.com/spf13/cobra"
 )
@@ -12,15 +15,29 @@ import (
 // workflowListCmd represents the workflowList command
 var workflowListCmd = &cobra.Command{
 	Use:   "ls",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "list all workflows",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("workflowList called")
+		err := viper.ReadInConfig()
+		if err != nil {
+			fmt.Println("The project is not initialized")
+			return
+		}
+
+		var workflows []domain.Workflow
+
+		err = viper.UnmarshalKey("workflows", &workflows)
+		if err != nil {
+			fmt.Printf("%s", err)
+			return
+		}
+
+		b, err := json.MarshalIndent(workflows, "", "  ")
+
+		if err != nil {
+			fmt.Println("error:", err)
+		}
+		fmt.Printf(`%s\n`, string(b))
+		return
 	},
 }
 

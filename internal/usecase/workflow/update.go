@@ -5,6 +5,8 @@ package workflow
 
 import (
 	"fmt"
+	"github.com/konstellation-io/fake-kli/internal/domain"
+	"github.com/spf13/viper"
 
 	"github.com/spf13/cobra"
 )
@@ -12,19 +14,57 @@ import (
 // workflowUpdateCmd represents the workflowUpdate command
 var workflowUpdateCmd = &cobra.Command{
 	Use:   "update",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Update a given workflow",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("workflowUpdate called")
+		err := viper.ReadInConfig()
+		if err != nil {
+			fmt.Println("The project is not initialized")
+			return
+		}
+
+		workflowName, _ := cmd.Flags().GetString("name")
+		workflowType, _ := cmd.Flags().GetString("type")
+
+		var workflows []domain.Workflow
+
+		err = viper.UnmarshalKey("workflows", &workflows)
+		if err != nil {
+			fmt.Printf("error reading project metadata: %s", err)
+			return
+		}
+
+		for i, workflow := range workflows {
+			if workflow.Name == workflowName {
+				workflows = append(workflows, domain.Workflow{Name: workflowName, WorkflowType: workflowType})
+
+				if workflowType == "" {
+					workflowType = workflow.WorkflowType
+				}
+
+				workflows[i] = domain.Workflow{Name: workflowName, WorkflowType: workflowType, Processes: workflow.Processes}
+
+				viper.Set("workflows", workflows)
+
+				err = viper.WriteConfig()
+				if err != nil {
+					fmt.Printf("%s", err)
+				}
+				fmt.Printf("Workflow %q successfully updated\n", workflowName)
+				return
+			}
+		}
+		fmt.Printf("The %q workflow does not exist\n", workflowName)
 	},
 }
 
 func init() {
 	// Add subcommand to the parent command
 	WorkflowCmd.AddCommand(workflowUpdateCmd)
+
+	// Add flags
+	workflowUpdateCmd.Flags().String("name", "", "Workflow name")
+	workflowUpdateCmd.Flags().String("type", "", "Workflow type")
+
+	// Add required flags
+	workflowUpdateCmd.MarkFlagRequired("name")
 }
