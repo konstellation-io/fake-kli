@@ -35,8 +35,6 @@ var workflowUpdateCmd = &cobra.Command{
 
 		for i, workflow := range workflows {
 			if workflow.Name == workflowName {
-				workflows = append(workflows, domain.Workflow{Name: workflowName, WorkflowType: workflowType})
-
 				if workflowType == "" {
 					workflowType = workflow.WorkflowType
 				}

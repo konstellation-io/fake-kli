@@ -35,10 +35,8 @@ var processUpdateCmd = &cobra.Command{
 			fmt.Printf("%s", err)
 			return
 		}
-
 		for i, workflow := range workflows {
 			if workflow.Name == workflowName {
-
 				for j, process := range workflow.Processes {
 					if process.Name == processName {
 
@@ -71,9 +69,9 @@ var processUpdateCmd = &cobra.Command{
 						return
 					}
 				}
+				fmt.Printf("The %q process does not exist\n", processName)
+				return
 			}
-			fmt.Printf("The %q process does not exist\n", processName)
-			return
 		}
 		fmt.Printf("The %q workflow does not exist\n", workflowName)
 	},
