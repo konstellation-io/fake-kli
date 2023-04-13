@@ -14,8 +14,8 @@ var serverUpdateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Update a server",
 	Run: func(cmd *cobra.Command, args []string) {
-		remote := cmd.Flags().String("remote", "", "Server name to update")
-		url := cmd.Flags().String("url", "", "Server url")
+		remote, _ := cmd.Flags().GetString("remote")
+		url, _ := cmd.Flags().GetString("url")
 
 		fmt.Printf("Server %q updated with url %q", remote, url)
 	},
