@@ -1,10 +1,10 @@
 package internal
 
 import (
-	"KliMock/internal/usecase"
-	"KliMock/internal/usecase/process"
-	"KliMock/internal/usecase/server"
-	"KliMock/internal/usecase/workflow"
+	"github.com/konstellation-io/fake-kli/internal/usecase"
+	"github.com/konstellation-io/fake-kli/internal/usecase/process"
+	"github.com/konstellation-io/fake-kli/internal/usecase/server"
+	"github.com/konstellation-io/fake-kli/internal/usecase/workflow"
 	"github.com/spf13/viper"
 	"os"
 

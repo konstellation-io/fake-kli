@@ -4,7 +4,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package process
 
 import (
-	"KliMock/internal/domain"
+	"github.com/konstellation-io/fake-kli/internal/domain"
 
 	"encoding/json"
 	"fmt"

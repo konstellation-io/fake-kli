@@ -4,8 +4,8 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package process
 
 import (
-	"KliMock/internal/domain"
 	"fmt"
+	"github.com/konstellation-io/fake-kli/internal/domain"
 	"github.com/spf13/viper"
 
 	"github.com/spf13/cobra"

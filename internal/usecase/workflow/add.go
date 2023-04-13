@@ -4,7 +4,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package workflow
 
 import (
-	"KliMock/internal/domain"
+	"github.com/konstellation-io/fake-kli/internal/domain"
 
 	"fmt"
 	"github.com/spf13/cobra"

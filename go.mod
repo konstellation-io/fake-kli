@@ -1,4 +1,4 @@
-module KliMock
+module github.com/konstellation-io/fake-kli
 
 go 1.20
 
