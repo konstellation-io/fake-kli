@@ -5,3 +5,5 @@ Before executing the next command, replace the version number with the specific 
  go build -o ./dist/kli -ldflags="-X 'github.com/konstellation-io/fake-kli/cmd.version=0.0.2'" cmd/kli.go
 ```
 
+# Usage
+The KLI has the next commands:
