@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package server
 
 import (
@@ -13,10 +10,28 @@ import (
 var serverLoginCmd = &cobra.Command{
 	Use:   "login",
 	Short: "Login to the given server",
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
+		remote := args[0] // remote
 
-		remote, _ := cmd.Flags().GetString("remote")
-		fmt.Printf("Correctly logged in to %q", remote)
+		if remote == "" {
+			fmt.Println("There was an error trying to authenticate to the server: The remote does not exist")
+			return
+		}
+
+		user, _ := cmd.Flags().GetString("user")
+		password, _ := cmd.Flags().GetString("password")
+		token, _ := cmd.Flags().GetString("token")
+
+		if user == "" && password == "" && token != "" {
+			fmt.Println("Successfully logged in!")
+		}
+
+		if user != "" && password != "" && token == "" {
+			fmt.Println("Successfully logged in!")
+		}
+
+		fmt.Println("Unauthorized!")
 	},
 }
 
@@ -25,12 +40,7 @@ func init() {
 	ServerCmd.AddCommand(serverLoginCmd)
 
 	// Add flags to the subcommand
-	serverLoginCmd.Flags().String("remote", "", "Server name to login to")
 	serverLoginCmd.Flags().String("user", "", "Username")
 	serverLoginCmd.Flags().String("password", "", "Password")
-
-	// Mark flags as required
-	serverLoginCmd.MarkFlagRequired("remote")
-	serverLoginCmd.MarkFlagRequired("user")
-	serverLoginCmd.MarkFlagRequired("password")
+	serverLoginCmd.Flags().String("token", "", "Session token")
 }

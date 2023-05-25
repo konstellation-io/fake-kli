@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package process
 
 import (
@@ -15,16 +12,18 @@ import (
 var processUpdateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Update a given process",
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		err := viper.ReadInConfig()
 		if err != nil {
-			fmt.Println("The project is not initialized")
+			fmt.Println("The product is not initialized")
 			return
 		}
 
-		workflowName, _ := cmd.Flags().GetString("workflow")
-		processName, _ := cmd.Flags().GetString("name")
-		processType, _ := cmd.Flags().GetString("type")
+		processName := args[0]
+
+		workflowName, _ := cmd.Flags().GetString("workflow_id")
+		processType, _ := cmd.Flags().GetString("process_type")
 		processBaseImage, _ := cmd.Flags().GetString("img")
 		processSourceCode, _ := cmd.Flags().GetString("src")
 
@@ -82,11 +81,11 @@ func init() {
 	ProcessCmd.AddCommand(processUpdateCmd)
 
 	// Add flags
-	processUpdateCmd.Flags().String("name", "", "Process name")
-	processUpdateCmd.Flags().String("type", "", "Process type")
+	processUpdateCmd.Flags().String("workflow_id", "", "Workflow ID")
+	processUpdateCmd.Flags().String("process_type", "", "Process type")
 	processUpdateCmd.Flags().String("img", "", "Base image")
 	processUpdateCmd.Flags().String("src", "", "Source code")
 
-	// Define required flags
-	processUpdateCmd.MarkFlagRequired("name")
+	// Add required flags
+	_ = processUpdateCmd.MarkFlagRequired("workflow_id")
 }

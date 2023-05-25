@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package server
 
 import (
@@ -12,6 +9,7 @@ import (
 var serverListCmd = &cobra.Command{
 	Use:   "ls",
 	Short: "List all servers",
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		// list a list of fake servers with their names and urls
 		fmt.Printf("Server %q: %q\n", "server1", "https://server1.com")

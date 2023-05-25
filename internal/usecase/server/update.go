@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package server
 
 import (
@@ -13,6 +10,7 @@ import (
 var serverUpdateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Update a server",
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		remote, _ := cmd.Flags().GetString("remote")
 		url, _ := cmd.Flags().GetString("url")

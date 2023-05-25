@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package process
 
 import (
@@ -15,16 +12,18 @@ import (
 var processAddCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Add a new process",
+	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
 		err := viper.ReadInConfig()
 		if err != nil {
-			fmt.Println("The project is not initialized")
+			fmt.Println("The product is not initialized")
 			return
 		}
 
+		processType := args[0]
+		processName := args[1]
+
 		workflowName, _ := cmd.Flags().GetString("workflow")
-		processName, _ := cmd.Flags().GetString("name")
-		processType, _ := cmd.Flags().GetString("type")
 		processBaseImage, _ := cmd.Flags().GetString("img")
 		processSourceCode, _ := cmd.Flags().GetString("src")
 
@@ -68,14 +67,11 @@ func init() {
 	ProcessCmd.AddCommand(processAddCmd)
 
 	// Add flags
-	processAddCmd.Flags().String("name", "", "Process name")
-	processAddCmd.Flags().String("type", "", "Process type")
+	processAddCmd.Flags().String("product-id", "", "The product ID in where the process will be added")
 	processAddCmd.Flags().String("img", "", "Base image")
 	processAddCmd.Flags().String("src", "", "Source code")
 
 	// Define required flags
-	processAddCmd.MarkFlagRequired("name")
-	processAddCmd.MarkFlagRequired("type")
 	processAddCmd.MarkFlagRequired("img")
 	processAddCmd.MarkFlagRequired("src")
 }

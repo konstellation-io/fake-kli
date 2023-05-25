@@ -2,7 +2,11 @@ package internal
 
 import (
 	"github.com/konstellation-io/fake-kli/internal/usecase"
+	"github.com/konstellation-io/fake-kli/internal/usecase/plugin"
+	"github.com/konstellation-io/fake-kli/internal/usecase/plugin/workspace"
 	"github.com/konstellation-io/fake-kli/internal/usecase/process"
+	"github.com/konstellation-io/fake-kli/internal/usecase/product"
+	"github.com/konstellation-io/fake-kli/internal/usecase/runner"
 	"github.com/konstellation-io/fake-kli/internal/usecase/server"
 	"github.com/konstellation-io/fake-kli/internal/usecase/workflow"
 	"github.com/spf13/viper"
@@ -49,7 +53,11 @@ func initConfig() {
 
 func init() {
 	// Add subcommands to the root command
-	kliCmd.AddCommand(usecase.InitCmd)
+	kliCmd.AddCommand(usecase.InstallCmd)
+	kliCmd.AddCommand(product.ProductCmd)
+	kliCmd.AddCommand(runner.RunnerCmd)
+	kliCmd.AddCommand(plugin.PluginCmd)
+	kliCmd.AddCommand(workspace.WorkspaceCmd)
 	kliCmd.AddCommand(usecase.BuildCmd)
 	kliCmd.AddCommand(workflow.WorkflowCmd)
 	kliCmd.AddCommand(process.ProcessCmd)

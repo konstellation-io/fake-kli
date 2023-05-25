@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package server
 
 import (
@@ -13,11 +10,14 @@ import (
 var serverPushCmd = &cobra.Command{
 	Use:   "push",
 	Short: "Uploads the generated KRT to the server",
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		remote, _ := cmd.Flags().GetString("remote")
-		krtFile, _ := cmd.Flags().GetString("krt-file")
+		if len(args) != 1 || args[0] == "" {
+			fmt.Println("Please provide a KRT file to upload")
+			return
+		}
 
-		fmt.Printf("KRT file %q uploaded to server %q", krtFile, remote)
+		fmt.Println("KRT successfully uploaded to the remote!")
 	},
 }
 
@@ -27,9 +27,4 @@ func init() {
 
 	// Add flags to the subcommand
 	serverPushCmd.Flags().String("remote", "", "Server name to login to")
-	serverPushCmd.Flags().String("krt-file", "", "Krt file to upload")
-
-	// Mark flags as required
-	serverPushCmd.MarkFlagRequired("remote")
-	serverPushCmd.MarkFlagRequired("krt-file")
 }

@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package workflow
 
 import (
@@ -16,10 +13,11 @@ import (
 var workflowListCmd = &cobra.Command{
 	Use:   "ls",
 	Short: "list all workflows",
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		err := viper.ReadInConfig()
 		if err != nil {
-			fmt.Println("The project is not initialized")
+			fmt.Println("The product is not initialized")
 			return
 		}
 
@@ -44,4 +42,7 @@ var workflowListCmd = &cobra.Command{
 func init() {
 	// Add subcommand to the parent command
 	WorkflowCmd.AddCommand(workflowListCmd)
+
+	// Add flags
+	workflowListCmd.Flags().String("product-id", "", "Product from where to list the workflow")
 }

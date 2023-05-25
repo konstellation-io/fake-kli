@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package workflow
 
 import (
@@ -10,7 +7,7 @@ import (
 // WorkflowCmd represents the workflow command
 var WorkflowCmd = &cobra.Command{
 	Use:   "workflow",
-	Short: "Manage your project workflows",
+	Short: "Manage your product workflows",
 }
 
 func init() {

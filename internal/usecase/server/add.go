@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package server
 
 import (
@@ -12,13 +9,15 @@ import (
 // serverAddCmd represents the serverAdd command
 var serverAddCmd = &cobra.Command{
 	Use:   "add",
-	Short: "Add a new server to the project",
+	Short: "Add a new server to the product",
+	Args:  cobra.MatchAll(cobra.ExactArgs(2)),
+	// ValidArgs: []string{"url", "remote"},
 	Run: func(cmd *cobra.Command, args []string) {
 
-		url, _ := cmd.Flags().GetString("url")
-		remote, _ := cmd.Flags().GetString("remote")
+		remote := args[0] // remote
+		url := args[1]    // url
 
-		fmt.Printf("Server with url %q added as %q", url, remote)
+		fmt.Printf("Server %q added successfully as %q", url, remote)
 	},
 }
 
@@ -27,10 +26,8 @@ func init() {
 	ServerCmd.AddCommand(serverAddCmd)
 
 	// Add flags to the subcommand
-	serverAddCmd.Flags().String("url", "", "Server url")
-	serverAddCmd.Flags().String("remote", "", "Server name")
+	serverAddCmd.Flags().Bool("default", false, "Define current server as the default server")
 
 	// Mark flags as required
-	serverAddCmd.MarkFlagRequired("url")
-	serverAddCmd.MarkFlagRequired("remote")
+	serverAddCmd.MarkFlagRequired("default")
 }

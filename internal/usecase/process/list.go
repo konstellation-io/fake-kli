@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package process
 
 import (
@@ -16,14 +13,19 @@ import (
 var processListCmd = &cobra.Command{
 	Use:   "ls",
 	Short: "List all processes for a workflow",
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
-		err := viper.ReadInConfig()
-		if err != nil {
-			fmt.Println("The project is not initialized")
-			return
+		workflowName, _ := cmd.Flags().GetString("workflow-id")
+
+		if workflowName == "" {
+			fmt.Printf("Could not get the processes, the workflow %q does not exist.\n", workflowName)
 		}
 
-		workflowName, _ := cmd.Flags().GetString("workflow")
+		err := viper.ReadInConfig()
+		if err != nil {
+			fmt.Println("The product is not initialized")
+			return
+		}
 
 		var workflows []domain.Workflow
 
@@ -52,4 +54,11 @@ var processListCmd = &cobra.Command{
 func init() {
 	// Add subcommand to the parent command
 	ProcessCmd.AddCommand(processListCmd)
+
+	// Add flags
+	processListCmd.Flags().String("workflow-id", "", "Workflow from where to list the processes")
+	processListCmd.Flags().String("product-id", "", "Product from where to list the processes")
+
+	// Add required flags
+	_ = processListCmd.MarkFlagRequired("workflow-id")
 }

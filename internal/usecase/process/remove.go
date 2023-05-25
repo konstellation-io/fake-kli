@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package process
 
 import (
@@ -15,15 +12,17 @@ import (
 var processDeleteCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Remove a process",
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		err := viper.ReadInConfig()
 		if err != nil {
-			fmt.Println("The project is not initialized")
+			fmt.Println("The product is not initialized")
 			return
 		}
 
+		processName := args[0]
+
 		workflowName, _ := cmd.Flags().GetString("workflow")
-		processName, _ := cmd.Flags().GetString("name")
 
 		var workflows []domain.Workflow
 
@@ -65,8 +64,9 @@ func init() {
 	ProcessCmd.AddCommand(processDeleteCmd)
 
 	// Add flags
-	processDeleteCmd.Flags().String("name", "", "Process name")
+	processDeleteCmd.Flags().String("product_id", "", "Product name")
+	processDeleteCmd.Flags().String("workflow_id", "", "Workflow name")
 
 	// Define required flags
-	processDeleteCmd.MarkFlagRequired("name")
+	processDeleteCmd.MarkFlagRequired("workflow_id")
 }

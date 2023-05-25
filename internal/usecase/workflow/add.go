@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package workflow
 
 import (
@@ -15,21 +12,22 @@ import (
 var workflowAddCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Add a new workflow",
+	Args:  cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
+		workflowType := args[0]
+		workflowName := args[1]
+
 		err := viper.ReadInConfig()
 		if err != nil {
-			fmt.Println("The project is not initialized")
+			fmt.Println("The product is not initialized")
 			return
 		}
-
-		workflowName, _ := cmd.Flags().GetString("name")
-		workflowType, _ := cmd.Flags().GetString("type")
 
 		var workflows []domain.Workflow
 
 		err = viper.UnmarshalKey("workflows", &workflows)
 		if err != nil {
-			fmt.Printf("error reading project metadata: %s", err)
+			fmt.Printf("error reading product metadata: %s", err)
 			return
 		}
 
@@ -55,10 +53,5 @@ func init() {
 	WorkflowCmd.AddCommand(workflowAddCmd)
 
 	// Add flags
-	workflowAddCmd.Flags().String("name", "", "Workflow name")
-	workflowAddCmd.Flags().String("type", "", "Workflow type")
-
-	// Add required flags
-	workflowAddCmd.MarkFlagRequired("name")
-	workflowAddCmd.MarkFlagRequired("type")
+	workflowAddCmd.Flags().String("product-id", "", "Product in where to add the workflow")
 }

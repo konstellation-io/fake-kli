@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package workflow
 
 import (
@@ -15,20 +12,21 @@ import (
 var workflowDeleteCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Remove workflow",
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		err := viper.ReadInConfig()
 		if err != nil {
-			fmt.Println("The project is not initialized")
+			fmt.Println("The product is not initialized")
 			return
 		}
 
-		workflowName, _ := cmd.Flags().GetString("name")
+		workflowName := args[0]
 
 		var workflows []domain.Workflow
 
 		err = viper.UnmarshalKey("workflows", &workflows)
 		if err != nil {
-			fmt.Printf("error reading project metadata: %s", err)
+			fmt.Printf("error reading product metadata: %s", err)
 			return
 		}
 
@@ -55,8 +53,5 @@ func init() {
 	WorkflowCmd.AddCommand(workflowDeleteCmd)
 
 	// Add flags
-	workflowDeleteCmd.Flags().String("name", "", "Workflow name")
-
-	// Add required flags
-	workflowDeleteCmd.MarkFlagRequired("name")
+	workflowDeleteCmd.Flags().String("product-id", "", "Product name")
 }
