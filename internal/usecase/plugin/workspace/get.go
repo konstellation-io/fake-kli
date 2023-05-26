@@ -51,8 +51,8 @@ func getWorkspace(cmd *cobra.Command, args []string) {
 
 func init() {
 	//Add subcommand to parent command
-	WorkspaceCmd.AddCommand(WorkspaceInitCmd)
+	WorkspaceCmd.AddCommand(WorkspaceGetCmd)
 
 	// Add flags
-	WorkspaceInitCmd.Flags().String("remote", "", "The remote server name")
+	WorkspaceGetCmd.Flags().String("remote", "", "The remote server name")
 }

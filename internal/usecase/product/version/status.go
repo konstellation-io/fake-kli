@@ -28,5 +28,5 @@ func init() {
 	VersionCmd.AddCommand(VersionStatusCmd)
 
 	// Add flags
-	VersionStopCmd.Flags().String("remote", "", "The remote server name")
+	VersionStatusCmd.Flags().String("remote", "", "The remote server name")
 }
