@@ -7,7 +7,7 @@ import (
 
 // ListRunnerCmd represents the list runners command
 var ListRunnerCmd = &cobra.Command{
-	Use:   "list",
+	Use:   "ls",
 	Short: "List all runners",
 	Args:  cobra.NoArgs,
 	Run:   list,
@@ -17,13 +17,12 @@ func list(cmd *cobra.Command, args []string) {
 	remote, _ := cmd.Flags().GetString("remote")
 
 	if remote == "" {
-		fmt.Println("Could not list the runners, the remote does not exist")
-		return
+		remote = "origin"
 	}
 
 	fmt.Printf("Runners for remote %q:\n", remote)
-	fmt.Println("Python3.9 - V1.1", "Python3.9 CUDA - V1.1", "Python3.9 CUDA 11.6.1 - V1.1",
-		"Python3.10 CUDA 11.6.1 - Development - V1.1")
+	fmt.Println("- Python3.9 - V1.1", "\n- Python3.9 CUDA - V1.1", "\n- Python3.9 CUDA 11.6.1 - V1.1",
+		"\n- Python3.10 CUDA 11.6.1 - Development - V1.1")
 }
 
 func init() {

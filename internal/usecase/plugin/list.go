@@ -7,7 +7,7 @@ import (
 
 // ListPluginsCmd represents the list plugins command
 var ListPluginsCmd = &cobra.Command{
-	Use:   "list",
+	Use:   "ls",
 	Short: "List all plugins",
 	Args:  cobra.NoArgs,
 	Run:   list,
@@ -17,12 +17,11 @@ func list(cmd *cobra.Command, args []string) {
 	remote, _ := cmd.Flags().GetString("remote")
 
 	if remote == "" {
-		fmt.Println("Could not list the plugins, the remote does not exist")
-		return
+		remote = "origin"
 	}
 
 	fmt.Printf("Plugins for remote %q:\n", remote)
-	fmt.Println("Workspace", "MlFlow")
+	fmt.Println("- Workspace", "\n- MlFlow")
 }
 
 func init() {

@@ -17,7 +17,7 @@ var serverAddCmd = &cobra.Command{
 		remote := args[0] // remote
 		url := args[1]    // url
 
-		fmt.Printf("Server %q added successfully as %q", url, remote)
+		fmt.Printf("Server %q added successfully as %q.\n", url, remote)
 	},
 }
 
@@ -27,7 +27,4 @@ func init() {
 
 	// Add flags to the subcommand
 	serverAddCmd.Flags().Bool("default", false, "Define current server as the default server")
-
-	// Mark flags as required
-	serverAddCmd.MarkFlagRequired("default")
 }

@@ -18,11 +18,10 @@ func install(cmd *cobra.Command, args []string) {
 	remote, _ := cmd.Flags().GetString("remote")
 
 	if remote == "" {
-		fmt.Println("Could not list the runners, the remote does not exist")
-		return
+		remote = "origin"
 	}
 
-	if pluginName != "workspace" || pluginName != "mlflow" {
+	if pluginName != "workspace" && pluginName != "mlflow" {
 		fmt.Printf("Could not install the plugin, the plugin <sanitized plugin name> "+
 			"is not available for the remote %q\n", remote)
 	}

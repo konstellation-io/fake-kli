@@ -25,10 +25,12 @@ var serverLoginCmd = &cobra.Command{
 
 		if user == "" && password == "" && token != "" {
 			fmt.Println("Successfully logged in!")
+			return
 		}
 
 		if user != "" && password != "" && token == "" {
 			fmt.Println("Successfully logged in!")
+			return
 		}
 
 		fmt.Println("Unauthorized!")

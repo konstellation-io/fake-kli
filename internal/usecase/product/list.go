@@ -7,7 +7,7 @@ import (
 
 // ListProductCmd represents the list product command
 var ListProductCmd = &cobra.Command{
-	Use:   "list",
+	Use:   "ls",
 	Short: "List all products",
 	Args:  cobra.NoArgs,
 	Run:   list,
@@ -17,12 +17,11 @@ func list(cmd *cobra.Command, args []string) {
 	remote, _ := cmd.Flags().GetString("remote")
 
 	if remote == "" {
-		fmt.Println("Could not list the products, the remote does not exist")
-		return
+		remote = "origin"
 	}
 
 	fmt.Printf("Products for remote %q:\n", remote)
-	fmt.Println("Product 1", "Product 2", "Product 3")
+	fmt.Println("- Product 1", "\n- Product 2", "\n- Product 3")
 }
 
 func init() {
