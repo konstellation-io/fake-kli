@@ -21,7 +21,7 @@ func list(cmd *cobra.Command, args []string) {
 	}
 
 	fmt.Printf("Plugins for remote %q:\n", remote)
-	fmt.Println("- Workspace", "\n- MlFlow")
+	fmt.Println("- Workspace (Installed)", "\n- MlFlow")
 }
 
 func init() {

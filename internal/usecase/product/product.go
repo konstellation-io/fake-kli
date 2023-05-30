@@ -5,6 +5,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const kaiFolderPermissions = 0777
+
 // ProductCmd represents the product command
 var ProductCmd = &cobra.Command{
 	Use:   "product",

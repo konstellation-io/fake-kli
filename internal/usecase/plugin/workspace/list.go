@@ -22,7 +22,7 @@ func list(cmd *cobra.Command, args []string) {
 	}
 
 	fmt.Printf("Workspace on the remote %q:\n", remote)
-	fmt.Println("Product 1: Workspace 1", "Product 2: Workspace 1", "Product 2: Workspace 2")
+	fmt.Println("Workspace 1: Product 1", "Workspace 2: Product 2", "Workspace 3: Product 2")
 }
 
 func init() {

@@ -8,8 +8,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const kaiFolderPermissions = 0777
-
 // CreateProductCmd represents the create product command
 var CreateProductCmd = &cobra.Command{
 	Use:   "create",
@@ -62,12 +60,9 @@ func init() {
 	ProductCmd.AddCommand(CreateProductCmd)
 
 	// Add flags
-	CreateProductCmd.Flags().String("version", "", "Set product version")
+	CreateProductCmd.Flags().String("version", "v0.0.1", "Set product version")
 	CreateProductCmd.Flags().String("description", "", "Set product description")
 	CreateProductCmd.Flags().String("remote", "", "The remote server name")
 	CreateProductCmd.Flags().Bool("init-local", true, "Sync the created product locally")
 	CreateProductCmd.Flags().String("local-path", ".kai", "Local path where to initialize the product")
-
-	// Add required flags
-	CreateProductCmd.MarkFlagRequired("version")
 }

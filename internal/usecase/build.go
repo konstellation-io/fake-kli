@@ -53,6 +53,7 @@ func init() {
 	BuildCmd.Flags().String("product", "", "Product name")
 	BuildCmd.Flags().String("output-dir", "", "Output directory")
 	BuildCmd.Flags().String("name", "", "Name to be given to the KRT file")
+	BuildCmd.Flags().String("version", "", "Version number to be updated before building the KRT file")
 
 	// Add required flags
 	BuildCmd.MarkFlagRequired("product")
