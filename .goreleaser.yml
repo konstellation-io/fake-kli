@@ -26,7 +26,6 @@ builds:
       ldflags:
         - -s -w -X github.com/konstellation-io/kli/internal/build.Version={{.Version}}
         - -X github.com/konstellation-io/kli/internal/build.Date={{time "2006-01-02"}}
-  - <<: *build_defaults
     id: macos
     goos: [darwin]
     goarch: [amd64, arm64]
@@ -46,19 +45,15 @@ archives:
       files:
         - LICENSE
       rlcp: true
-      wrap_in_directory: false
-  - <<: *archive_defaults
     id: nix
     builds: [macos, linux]
     format: tar.gz
-  - <<: *archive_defaults
-    id: windows-tar
-    builds: [windows]
-    format: tar.gz
+    wrap_in_directory: true
   - <<: *archive_defaults
     id: windows-zip
     builds: [windows]
     format: zip
+    wrap_in_directory: false
 
 # https://goreleaser.com/customization/nfpm/
 nfpms:
