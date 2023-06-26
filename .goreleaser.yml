@@ -19,7 +19,7 @@ before:
 builds:
   - <<: &build_defaults
       binary: bin/kli
-      main: ./cmd/main.go
+      main: ./cmd/kli.go
       env:
         - GO111MODULE=on
         - CGO_ENABLED=0
