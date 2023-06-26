@@ -61,8 +61,7 @@ nfpms:
     maintainer: Konstellation
     homepage: https://github.com/konstellation-io/kli
     description: CLI tool to manage Konstellation
-    dependencies:
-      - go
+    bindir: /usr
     formats:
       - deb
       - rpm
