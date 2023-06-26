@@ -7,7 +7,7 @@ release:
   prerelease: auto
   name_template: "Konstellation CLI {{.Version}}"
   github:
-    owner: keyrm10
+    owner: konstellation-io
     name: fake-kli
 
 # https://goreleaser.com/customization/hooks/
