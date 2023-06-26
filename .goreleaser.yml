@@ -3,7 +3,6 @@ project_name: fake-kli
 
 # https://goreleaser.com/customization/release/
 release:
-  draft: true
   prerelease: auto
   name_template: "Konstellation CLI {{.Version}}"
   github:
