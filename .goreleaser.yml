@@ -45,15 +45,14 @@ archives:
       # files:
       #   - LICENSE
       rlcp: true
+      wrap_in_directory: true
     id: nix
     builds: [macos, linux]
     format: tar.gz
-    wrap_in_directory: true
   - <<: *archive_defaults
     id: windows-zip
     builds: [windows]
     format: zip
-    wrap_in_directory: false
 
 # https://goreleaser.com/customization/nfpm/
 nfpms:
